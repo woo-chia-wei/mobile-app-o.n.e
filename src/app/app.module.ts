@@ -18,6 +18,8 @@ import { FIREBASE_CREDENTIALS } from './firebase.credentials';
 import { ShareDealPage } from '../pages/share-deal/share-deal';
 import { FindDealPage } from '../pages/find-deal/find-deal';
 
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 let config = FIREBASE_CREDENTIALS
 
 @NgModule({
@@ -33,7 +35,8 @@ let config = FIREBASE_CREDENTIALS
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
