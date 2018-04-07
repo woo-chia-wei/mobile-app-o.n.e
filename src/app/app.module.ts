@@ -15,6 +15,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { FIREBASE_CREDENTIALS } from './firebase.credentials';
+import { ShareDealPage } from '../pages/share-deal/share-deal';
+import { FindDealPage } from '../pages/find-deal/find-deal';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -23,7 +25,9 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    AccountPage
+    AccountPage,
+    ShareDealPage,
+    FindDealPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    AccountPage
+    AccountPage,
+    ShareDealPage,
+    FindDealPage
   ],
   providers: [
     StatusBar,

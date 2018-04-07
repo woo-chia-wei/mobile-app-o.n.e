@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ShareDealPage } from '../share-deal/share-deal';
+import { FindDealPage } from '../find-deal/find-deal';
 
 /**
  * Generated class for the AccountPage page.
@@ -30,6 +32,14 @@ export class AccountPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+  }
+
+  shareDeals(){
+    this.navCtrl.push(ShareDealPage);
+  }
+
+  findDeals(){
+    this.navCtrl.push(FindDealPage);
   }
 
   logout(){
