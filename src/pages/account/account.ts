@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the AccountPage page.
@@ -15,11 +16,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AccountPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private email: string;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private afAuth: AngularFireAuth,
+              public loadingController: LoadingController,
+              public toastController: ToastController) {
+
+    this.email = this.afAuth.auth.currentUser.email;
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+  }
+
+  logout(){
+
+    let loader = this.loadingController.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+
+    let toast = this.toastController.create({
+      message: "Account is logout successfully.",
+      duration: 1000,
+      position: 'middle'
+    });
+    
+    toast.present();
+
+    this.afAuth.auth.signOut();
   }
 
 }
