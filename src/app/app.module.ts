@@ -8,20 +8,35 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { DealServiceProvider } from '../providers/deal-service/deal-service';
+import { LoginPage } from '../pages/login/login';
+import { AccountPage } from '../pages/account/account';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { FIREBASE_CREDENTIALS } from './firebase.credentials';
+
+let config = FIREBASE_CREDENTIALS
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    AccountPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    AccountPage
   ],
   providers: [
     StatusBar,

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { User } from "../../models/user";
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AccountPage } from '../account/account';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,82 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  user = {} as User;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  constructor(private afAuth: AngularFireAuth,
+            public navCtrl: NavController, 
+            public navParams: NavParams,
+            public loadingController: LoadingController,
+            public toastController: ToastController) {
   }
+ 
+  async login(user: User) {
+    try {
+      const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      if (result) {
 
+        let loader = this.loadingController.create({
+          content: "Please wait...",
+          duration: 3000
+        });
+
+        console.log("Login account successfully.");
+
+        this.navCtrl.setRoot(AccountPage);
+      }  
+    }
+    catch (e) {
+
+      let toast = this.toastController.create({
+        message: e,
+        duration: 3000,
+        position: 'top'
+      });
+      
+      toast.present();
+      user.password = "";
+
+      console.error("login failure", e);
+    }
+  }
+ 
+  async register(user: User) {
+    try {
+      const result = await this.afAuth.auth.createUserWithEmailAndPassword(
+        user.email,
+        user.password
+      );
+      if (result) {
+
+        let loader = this.loadingController.create({
+          content: "Please wait...",
+          duration: 3000
+        });
+
+        let toast = this.toastController.create({
+          message: "Account is created successfully.",
+          duration: 1000,
+          position: 'middle'
+        });
+        
+        toast.present();
+
+        console.log("Register account successfully.");
+
+        this.navCtrl.setRoot(AccountPage);
+      }
+    } catch (e) {
+      
+      let toast = this.toastController.create({
+        message: e,
+        duration: 3000,
+        position: 'top'
+      });
+      
+      toast.present();
+      user.password = "";
+
+      console.error("Register failure", e);
+    }
+  }
 }
