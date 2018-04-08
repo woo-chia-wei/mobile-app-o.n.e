@@ -8,5 +8,7 @@ export interface DealEvent{
     startTime: Date,
     endTime: Date,
     url: string,
-    address: string
+    address: string,
+    longitude: number,
+    latitude: number
 }

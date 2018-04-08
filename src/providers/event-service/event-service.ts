@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DealEvent } from '../../models/event';
 import * as moment from 'moment';
+import { EVENTS_DATA } from '../../test/events'
 
 @Injectable()
 export class EventServiceProvider {
@@ -26,6 +27,27 @@ export class EventServiceProvider {
 
   deleteEvent(eventId: string){
     return this .db.object('dealEvents/' + eventId).remove();
+  }
+
+  addTestData(){
+    EVENTS_DATA.forEach(data => {
+      let new_data = {
+        "id": "",
+        "title": data.title,
+        "description": data.description,
+        "address": data.address,
+        "url": data.url,
+        "postalCode": data.postalCode.toString(),
+        "longitude": 0,
+        "latitude": 0,
+        "ownerId": data.ownerId,
+        "startTime": moment(data.startTime).toDate(),
+        "endTime": moment(data.endTime).toDate(),
+        "category": data.category
+      }
+
+      this.addEvent(new_data);
+    });
   }
 
 }
