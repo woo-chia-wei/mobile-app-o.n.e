@@ -7,6 +7,7 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 import { Observable } from '@firebase/util';
 import { DealEvent } from '../../models/event';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
+import { ProfilePage } from '../profile/profile';
 
 @IonicPage()
 @Component({
@@ -44,6 +45,10 @@ export class BusinessUserPage {
     }else{
       return 'Soon';
     }
+  }
+
+  redirectToProfilePage(){
+    this.navCtrl.push(ProfilePage);
   }
 
 }

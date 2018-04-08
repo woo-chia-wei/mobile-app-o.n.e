@@ -45,4 +45,8 @@ export class UserServiceProvider {
   public checkAuthState(){
     return this.afAuth.authState;
   }
+
+  public logOut(){
+    this.afAuth.auth.signOut();
+  }
 }

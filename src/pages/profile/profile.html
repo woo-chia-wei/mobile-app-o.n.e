@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="redirectToApp()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item no-lines>
+    <ion-label stacked>Email Address (Login)</ion-label>
+    <ion-input type="text" [(ngModel)]="user.email" disabled></ion-input>
+  </ion-item>
+
+  <ion-item no-lines>
+    <ion-label stacked>Contact</ion-label>
+    <ion-input type="text" [(ngModel)]="user.contact" disabled></ion-input>
+  </ion-item>
+
+  <ion-item no-lines>
+    <ion-label stacked>Account Type</ion-label>
+    <ion-input type="text" [ngModel]="accountType" disabled></ion-input>
+  </ion-item>
+
+  <ion-item no-lines>
+    <ion-label stacked>Created Time</ion-label>
+    <ion-input type="text" [ngModel]="createdTime" disabled></ion-input>
+  </ion-item>
+
+  <br>
+
+  <button ion-button full color="danger" (click)="logout()">Logout</button>
+
+</ion-content>

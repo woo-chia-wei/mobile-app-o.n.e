@@ -26,7 +26,7 @@ export class SignUpPage {
 
   async register(user: User) {
     try {
-      this.user.createdTime = new Date().toLocaleString();
+      this.user.createdTime = new Date();
       const result = await this.userService.registerUser(user);
       if (result) {
 

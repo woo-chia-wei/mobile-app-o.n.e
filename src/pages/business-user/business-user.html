@@ -1,5 +1,12 @@
 <ion-header>
   <ion-navbar color="primary">
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="redirectToProfilePage()">
+        <ion-icon name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>
       Event Lists
     </ion-title>
@@ -16,7 +23,7 @@
 <ion-content padding>
 
   <div>
-    <p>Welcome user "{{user.email}}" 
+    <p>Welcome user "{{user.email}}"
     </p>
 
     <p>Here you can manage your business events.</p>
@@ -27,20 +34,20 @@
     <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
       <ion-item text-wrap no-lines>
 
-          <div item-left>{{evt.title}}
-            <br>
-            <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
-            <br>
-            <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
-          </div>
-          <div item-right [ngClass]="{
+        <div item-left>{{evt.title}}
+          <br>
+          <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+          <br>
+          <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+        </div>
+        <div item-right [ngClass]="{
             'event-opening' : getStatus(evt) == 'Opening',
             'event-closed' : getStatus(evt) == 'Closed',
             'event-soon' : getStatus(evt) == 'Soon'
           }">
-            {{getStatus(evt)}}
-          </div>
-          
+          {{getStatus(evt)}}
+        </div>
+
       </ion-item>
 
       <ion-item-options side="right">
