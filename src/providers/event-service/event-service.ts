@@ -24,4 +24,8 @@ export class EventServiceProvider {
     return this.db.list('dealEvents', ref=>ref.orderByChild('ownerId').equalTo(this.userService.getCurrentUserId())).valueChanges();
   }
 
+  deleteEvent(eventId: string){
+    return this .db.object('dealEvents/' + eventId).remove();
+  }
+
 }

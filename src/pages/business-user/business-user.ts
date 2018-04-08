@@ -51,4 +51,12 @@ export class BusinessUserPage {
     this.navCtrl.push(ProfilePage);
   }
 
+  editDealEvent(event: DealEvent){
+
+  }
+
+  deleteDealEvent(eventId: string){
+    this.eventService.deleteEvent(eventId);
+  }
+
 }
