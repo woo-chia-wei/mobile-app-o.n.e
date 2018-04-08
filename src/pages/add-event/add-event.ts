@@ -4,6 +4,7 @@ import { DealEvent } from '../../models/event';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { BusinessUserPage } from '../business-user/business-user';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,14 @@ export class AddDealEventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddEventPage');
+  }
+
+  private getMinDate(): string{
+    return moment().format('YYYY-MM-DD')
+  }
+
+  private getMaxDate(): string{
+    return moment().add(1, 'years').format('YYYY-MM-DD')
   }
 
   validate() {
