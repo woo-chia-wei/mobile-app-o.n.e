@@ -19,6 +19,7 @@ import { ShareDealPage } from '../pages/share-deal/share-deal';
 import { FindDealPage } from '../pages/find-deal/find-deal';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -29,7 +30,8 @@ let config = FIREBASE_CREDENTIALS
     LoginPage,
     AccountPage,
     ShareDealPage,
-    FindDealPage
+    FindDealPage,
+    SignUpPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ let config = FIREBASE_CREDENTIALS
     LoginPage,
     AccountPage,
     ShareDealPage,
-    FindDealPage
+    FindDealPage,
+    SignUpPage
   ],
   providers: [
     StatusBar,

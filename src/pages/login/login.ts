@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { User } from "../../models/user";
 import { AccountPage } from '../account/account';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { SignUpPage } from '../sign-up/sign-up';
 
 @IonicPage()
 @Component({
@@ -51,38 +52,10 @@ export class LoginPage {
       console.error("login failure", e);
     }
   }
- 
-  async register(user: User) {
-    try {
-      const result = await this.userService.registerUser(user.email, user.password);
-      if (result) {
 
-        this.loadingController.create({
-          content: "Please wait...",
-          duration: 3000
-        });
-
-        this.toastController.create({
-          message: "Account is created successfully.",
-          duration: 1000,
-          position: 'middle'
-        }).present();
-
-        console.log("Register account successfully.");
-
-        this.navCtrl.setRoot(AccountPage);
-      }
-    } catch (e) {
-      
-      this.toastController.create({
-        message: e,
-        duration: 3000,
-        position: 'top'
-      }).present();
-
-      user.password = "";
-
-      console.error("Register failure", e);
-    }
+  redirectToSignUp(){
+    this.navCtrl.push(SignUpPage);
   }
+ 
+  
 }

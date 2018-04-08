@@ -1,6 +1,7 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { User } from '../../models/user';
 
 @Injectable()
 export class UserServiceProvider {
@@ -14,12 +15,14 @@ export class UserServiceProvider {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  public registerUser(email: string, password: string){
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      this.db.object(`users/${user.uid}`).set({
-        email: email,
-        createdTime: Date.now()
-      });
+  public registerUser(newUser: User){
+    
+    
+
+    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then((u) => {
+      console.log('object', `users/${u.uid}`);
+      console.log('user', newUser);
+      this.db.object(`users/${u.uid}`).set(newUser);
     });
   }
 

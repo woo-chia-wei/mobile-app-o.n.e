@@ -6,15 +6,21 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label floating>Email Address</ion-label>
+    <ion-label stacked>Email Address</ion-label>
     <ion-input type="text" [(ngModel)]="user.email"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Password</ion-label>
+    <ion-label stacked>Password</ion-label>
     <ion-input type="password" [(ngModel)]="user.password" (keyup.enter)="login(user)"></ion-input>
   </ion-item>
 
-  <button ion-button (click)="login(user)">Login</button>
-  <button ion-button color="light" (click)="register(user)">Register</button>
+  <div padding text-center>
+    <button  [disabled]="!(user.email && user.password)" ion-button round (click)="login(user)">Login</button>
+  </div>
+
+  <div padding text-center>
+    <button ion-button color="gray" block clear (click)="redirectToSignUp()">Create new account</button>
+  </div>
+
 </ion-content>

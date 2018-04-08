@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Create new Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label stacked>Email Address</ion-label>
+    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Contact</ion-label>
+    <ion-input type="text" [(ngModel)]="user.contact" placeholder="+65" (keyup.enter)="register(user)"></ion-input>
+  </ion-item>
+
+  <div padding text-center>
+    <button  [disabled]="!(user.email && user.password && user.contact)" ion-button round (click)="register(user)" color="danger">Create Account</button>
+  </div>
+
+</ion-content>
