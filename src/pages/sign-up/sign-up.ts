@@ -18,7 +18,7 @@ import { AccountPage } from '../account/account';
 })
 export class SignUpPage {
 
-  user = {} as User;
+  private user: User = {} as User;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,

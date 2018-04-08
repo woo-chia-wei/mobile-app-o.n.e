@@ -5,9 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 
-import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,9 +15,12 @@ import { AccountPage } from '../pages/account/account';
 export class MyApp {
   rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private afAuth: AngularFireAuth) {
+  constructor(platform: Platform, 
+              statusBar: StatusBar, 
+              splashScreen: SplashScreen, 
+              public userService: UserServiceProvider) {
 
-    this.afAuth.authState.subscribe(auth => {
+    this.userService.checkAuthState().subscribe(auth => {
       if(!auth){
         console.log('Auth is false');
         this.rootPage = LoginPage;

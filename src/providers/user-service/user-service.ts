@@ -16,9 +16,6 @@ export class UserServiceProvider {
   }
 
   public registerUser(newUser: User){
-    
-    
-
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then((u) => {
       console.log('object', `users/${u.uid}`);
       console.log('user', newUser);
@@ -41,7 +38,11 @@ export class UserServiceProvider {
     });
   }
 
-  public GetCurrentUser(){
+  public getCurrentUser(){
     return this.db.object(`users/${this.getCurrentUserId()}`).valueChanges();
+  }
+
+  public checkAuthState(){
+    return this.afAuth.authState;
   }
 }

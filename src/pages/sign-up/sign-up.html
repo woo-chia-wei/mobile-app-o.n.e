@@ -20,6 +20,13 @@
     <ion-input type="text" [(ngModel)]="user.contact" placeholder="+65" (keyup.enter)="register(user)"></ion-input>
   </ion-item>
 
+  <br>
+
+  <ion-item text-wrap>
+    <ion-label class="business-label">Is Business Account?</ion-label>
+    <ion-toggle [(ngModel)]="user.isBusiness"></ion-toggle>
+  </ion-item>
+
   <div padding text-center>
     <button  [disabled]="!(user.email && user.password && user.contact)" ion-button round (click)="register(user)" color="danger">Create Account</button>
   </div>

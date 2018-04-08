@@ -30,7 +30,7 @@ export class AccountPage {
               public db: AngularFireDatabase) {
 
 
-    this.userService.GetCurrentUser().subscribe(user => {
+    this.userService.getCurrentUser().subscribe(user => {
       this.email = user['email'];
     });
 
