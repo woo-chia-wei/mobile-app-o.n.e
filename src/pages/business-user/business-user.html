@@ -1,28 +1,63 @@
 <ion-header>
   <ion-navbar color="primary">
-      <ion-title>
-          Business Page
-      </ion-title>
-  
-      <ion-buttons end>
-        <button ion-button icon-only (click)="redirectToAddEventPage()">
-          <ion-icon name="md-add-circle"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
+    <ion-title>
+      Event Lists
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="redirectToAddEventPage()">
+        <ion-icon name="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
   <div>
-    <h4 text-center>Welcome {{user.email}}! </h4>
+    <p>Welcome user "{{user.email}}" 
+    </p>
 
-    <p>Here you can add upcoming and manage ongoing events by introducing great deals of your business! </p>
-
-    <p><b>Hints</b>: Adding reference links and photos will attract more attentions!</p>
+    <p>Here you can manage your business events.</p>
   </div>
 
+  <ion-list no-lines>
+
+    <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
+      <ion-item text-wrap no-lines>
+
+          <div item-left>{{evt.title}}
+            <br>
+            <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+            <br>
+            <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+          </div>
+          <div item-right [ngClass]="{
+            'event-opening' : getStatus(evt) == 'Opening',
+            'event-closed' : getStatus(evt) == 'Closed',
+            'event-soon' : getStatus(evt) == 'Soon'
+          }">
+            {{getStatus(evt)}}
+          </div>
+          
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="editTask(task)">
+          <ion-icon name="ios-create">
+          </ion-icon>
+        </button>
+
+        <button ion-button color="danger" (click)="deleteTask(task.id)">
+          <ion-icon name="md-trash">
+          </ion-icon>
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
 
 
 
