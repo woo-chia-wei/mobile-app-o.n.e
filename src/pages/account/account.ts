@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ShareDealPage } from '../share-deal/share-deal';
 import { FindDealPage } from '../find-deal/find-deal';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
  * Generated class for the AccountPage page.
@@ -24,9 +26,14 @@ export class AccountPage {
               public navParams: NavParams,
               private afAuth: AngularFireAuth,
               public loadingController: LoadingController,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              public userService: UserServiceProvider,
+              public db: AngularFireDatabase) {
 
-    this.email = this.afAuth.auth.currentUser.email;
+
+    this.userService.GetCurrentUser().subscribe(user => {
+      this.email = user.email;
+    });
 
   }
 

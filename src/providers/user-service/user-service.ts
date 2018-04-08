@@ -15,11 +15,20 @@ export class UserServiceProvider {
   }
 
   public registerUser(email: string, password: string){
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((user) => {
+      this.db.object(`users/${user.uid}`).set({
+        email: email,
+        createdTime: Date.now()
+      });
+    });
   }
 
   public getCurrentUserEmail(): string{
     return this.afAuth.auth.currentUser.email;
+  }
+
+  public getCurrentUserId(): string{
+    return this.afAuth.auth.currentUser.uid;
   }
 
   public logUserLogin(){
@@ -27,5 +36,9 @@ export class UserServiceProvider {
       user: this.afAuth.auth.currentUser.email,
       loginTime: Date.now()
     });
+  }
+
+  public GetCurrentUser(){
+    return this.db.object(`users/${this.getCurrentUserId()}`).valueChanges();
   }
 }
