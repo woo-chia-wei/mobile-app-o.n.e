@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { User } from "../../models/user";
-import { AccountPage } from '../account/account';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { SignUpPage } from '../sign-up/sign-up';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -36,7 +36,7 @@ export class LoginPage {
 
         console.log("Login account successfully.");
 
-        this.navCtrl.setRoot(AccountPage);
+        this.navCtrl.setRoot(MyApp);
       }  
     }
     catch (e) {

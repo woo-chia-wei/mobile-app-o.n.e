@@ -2,14 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, DateTime } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { User } from '../../models/user';
-import { AccountPage } from '../account/account';
-
-/**
- * Generated class for the SignUpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -50,7 +43,7 @@ export class SignUpPage {
 
         console.log("Register account successfully.");
 
-        this.navCtrl.setRoot(AccountPage);
+        this.navCtrl.setRoot(MyApp);
       }
     } catch (e) {
       

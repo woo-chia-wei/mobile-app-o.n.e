@@ -6,8 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 
 import { LoginPage } from '../pages/login/login';
-import { AccountPage } from '../pages/account/account';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { BusinessUserPage } from '../pages/business-user/business-user';
+import { NormalUserPage } from '../pages/normal-user/normal-user';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +28,12 @@ export class MyApp {
       }
       else{
         console.log('Auth is true');
-        this.rootPage = AccountPage;
+        this.userService.getCurrentUser().subscribe(x => {
+          if(x['isBusiness'])
+            this.rootPage = BusinessUserPage;
+          else
+            this.rootPage = NormalUserPage;
+        })
       }
         
     });

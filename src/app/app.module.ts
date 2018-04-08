@@ -9,7 +9,6 @@ import { HomePage } from '../pages/home/home';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { DealServiceProvider } from '../providers/deal-service/deal-service';
 import { LoginPage } from '../pages/login/login';
-import { AccountPage } from '../pages/account/account';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -20,6 +19,8 @@ import { FindDealPage } from '../pages/find-deal/find-deal';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { BusinessUserPage } from '../pages/business-user/business-user';
+import { NormalUserPage } from '../pages/normal-user/normal-user';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -28,10 +29,11 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    AccountPage,
     ShareDealPage,
     FindDealPage,
-    SignUpPage
+    SignUpPage,
+    BusinessUserPage,
+    NormalUserPage
   ],
   imports: [
     BrowserModule,
@@ -45,10 +47,11 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    AccountPage,
     ShareDealPage,
     FindDealPage,
-    SignUpPage
+    SignUpPage,
+    BusinessUserPage,
+    NormalUserPage
   ],
   providers: [
     StatusBar,
