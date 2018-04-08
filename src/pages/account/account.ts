@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ShareDealPage } from '../share-deal/share-deal';
 import { FindDealPage } from '../find-deal/find-deal';
@@ -25,14 +25,13 @@ export class AccountPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private afAuth: AngularFireAuth,
-              public loadingController: LoadingController,
               public toastController: ToastController,
               public userService: UserServiceProvider,
               public db: AngularFireDatabase) {
 
 
     this.userService.GetCurrentUser().subscribe(user => {
-      this.email = user.email;
+      this.email = user['email'];
     });
 
   }
@@ -51,20 +50,16 @@ export class AccountPage {
 
   logout(){
 
-    let loader = this.loadingController.create({
-      content: "Please wait...",
-      duration: 3000
-    });
-
     let toast = this.toastController.create({
-      message: "Account is logout successfully.",
-      duration: 1000,
-      position: 'middle'
+      message: "Logging out...",
+      duration: 3000,
+      position: 'top'
     });
     
+    toast.onDidDismiss(() => {
+      this.afAuth.auth.signOut();
+    });
     toast.present();
-
-    this.afAuth.auth.signOut();
   }
 
 }
