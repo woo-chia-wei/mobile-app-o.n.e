@@ -6,7 +6,7 @@ import { User } from '../../models/user';
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(public afAuth: AngularFireAuth,
               public db: AngularFireDatabase) {
     console.log('Hello UserServiceProvider Provider');
   }

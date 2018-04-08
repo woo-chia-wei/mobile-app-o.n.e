@@ -21,6 +21,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { BusinessUserPage } from '../pages/business-user/business-user';
 import { NormalUserPage } from '../pages/normal-user/normal-user';
+import { AddDealEventPage } from '../pages/add-event/add-event';
+import { EventServiceProvider } from '../providers/event-service/event-service';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -33,7 +35,8 @@ let config = FIREBASE_CREDENTIALS
     FindDealPage,
     SignUpPage,
     BusinessUserPage,
-    NormalUserPage
+    NormalUserPage,
+    AddDealEventPage
   ],
   imports: [
     BrowserModule,
@@ -51,14 +54,16 @@ let config = FIREBASE_CREDENTIALS
     FindDealPage,
     SignUpPage,
     BusinessUserPage,
-    NormalUserPage
+    NormalUserPage,
+    AddDealEventPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
-    DealServiceProvider
+    DealServiceProvider,
+    EventServiceProvider
   ]
 })
 export class AppModule {}
