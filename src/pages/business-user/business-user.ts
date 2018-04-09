@@ -26,6 +26,7 @@ export class BusinessUserPage {
     this.userService.getCurrentUser().subscribe(u => this.user = u as User);
     this.dealEvents = this.eventService.getEvents();
     // this.eventService.addTestData();
+    
   }
 
   ionViewDidLoad() {
@@ -37,12 +38,12 @@ export class BusinessUserPage {
   }
 
   getStatus(dealEvent: DealEvent){
-    let today = new Date();
+    let today = new Date().getTime();
 
-    if(today.getTime() < new Date(dealEvent.startTime).getTime()){
-      return 'Closed';
-    }else if(today.getTime() <= new Date(dealEvent.endTime).getTime()){
+    if(dealEvent.startTime <= today && today <= dealEvent.endTime){
       return 'Opening';
+    }else if(today > dealEvent.endTime){
+      return 'Closed';
     }else{
       return 'Soon';
     }
@@ -58,6 +59,14 @@ export class BusinessUserPage {
 
   deleteDealEvent(eventId: string){
     this.eventService.deleteEvent(eventId);
+  }
+
+  truncate(text: string){
+    if(text.length > 30){
+      return text.substring(0, 27) + '...';
+    }
+
+    return text;
   }
 
 }

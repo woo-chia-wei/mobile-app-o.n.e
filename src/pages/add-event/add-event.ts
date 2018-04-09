@@ -15,6 +15,8 @@ export class AddDealEventPage {
 
   private categories: string[] = ['Food and Beverage', 'Retailer'];
   private dealEvent: DealEvent = {} as DealEvent;
+  private startTime: Date;
+  private endTime: Date;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -42,14 +44,14 @@ export class AddDealEventPage {
     return (this.dealEvent.category) &&
            (this.dealEvent.title) &&
            (this.dealEvent.description) &&
-           (this.dealEvent.startTime != null) &&
-           (this.dealEvent.endTime != null) &&
+           (this.startTime != null) &&
+           (this.endTime != null) &&
            (this.dealEvent.postalCode);
   }
 
   create() {
 
-    if(this.dealEvent.endTime <= this.dealEvent.startTime){
+    if(this.endTime <= this.startTime){
       this.toastController.create({
         message: "End time cannot be earlier or equal than start time!",
         duration: 3000,
@@ -60,6 +62,9 @@ export class AddDealEventPage {
     }
 
     try{
+
+      this.dealEvent.startTime = new Date(this.startTime).getTime();
+      this.dealEvent.endTime = new Date(this.endTime).getTime();
       this.eventService.addEvent(this.dealEvent);
 
       this.toastController.create({

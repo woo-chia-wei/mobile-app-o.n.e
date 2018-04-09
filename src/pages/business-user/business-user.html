@@ -21,20 +21,13 @@
 
 
 <ion-content padding>
-
-  <div>
-    <p>Welcome user "{{user.email}}"
-    </p>
-
-    <p>Here you can manage your business events.</p>
-  </div>
-
+  
   <ion-list no-lines>
 
     <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
       <ion-item text-wrap no-lines>
 
-        <div item-left>{{evt.title}}
+        <div item-left>{{truncate(evt.title)}}
           <br>
           <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
           <br>

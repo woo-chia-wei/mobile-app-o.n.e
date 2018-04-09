@@ -41,10 +41,10 @@ export class EventServiceProvider {
         "longitude": 0,
         "latitude": 0,
         "ownerId": data.ownerId,
-        "startTime": moment(data.startTime).toDate(),
-        "endTime": moment(data.endTime).toDate(),
+        "startTime": new Date(data.startTime).getTime(),
+        "endTime": new Date(data.endTime).getTime(),
         "category": data.category
-      }
+      };
 
       this.addEvent(new_data);
     });

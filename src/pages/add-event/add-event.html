@@ -34,14 +34,14 @@
     <ion-label stacked>Start From (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="dealEvent.startTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="startTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>End At (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="dealEvent.endTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="endTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
   </ion-item>
 
   <ion-item>
