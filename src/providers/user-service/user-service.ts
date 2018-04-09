@@ -31,13 +31,6 @@ export class UserServiceProvider {
     return this.afAuth.auth.currentUser.uid;
   }
 
-  public logUserLogin(){
-    this.db.list('logins').push({
-      user: this.afAuth.auth.currentUser.email,
-      loginTime: Date.now()
-    });
-  }
-
   public getCurrentUser(){
     return this.db.object(`users/${this.getCurrentUserId()}`).valueChanges();
   }

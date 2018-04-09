@@ -25,7 +25,6 @@ export class BusinessUserPage {
               public eventService: EventServiceProvider) {
     this.userService.getCurrentUser().subscribe(u => this.user = u as User);
     this.dealEvents = this.eventService.getEvents();
-    // this.eventService.addTestData();
     
   }
 

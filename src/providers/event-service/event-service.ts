@@ -29,25 +29,4 @@ export class EventServiceProvider {
     return this .db.object('dealEvents/' + eventId).remove();
   }
 
-  addTestData(){
-    EVENTS_DATA.forEach(data => {
-      let new_data = {
-        "id": "",
-        "title": data.title,
-        "description": data.description,
-        "address": data.address,
-        "url": data.url,
-        "postalCode": data.postalCode.toString(),
-        "longitude": 0,
-        "latitude": 0,
-        "ownerId": data.ownerId,
-        "startTime": new Date(data.startTime).getTime(),
-        "endTime": new Date(data.endTime).getTime(),
-        "category": data.category
-      };
-
-      this.addEvent(new_data);
-    });
-  }
-
 }

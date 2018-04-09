@@ -32,8 +32,6 @@ export class LoginPage {
           duration: 3000
         });
 
-        this.userService.logUserLogin();
-
         console.log("Login account successfully.");
 
         this.navCtrl.setRoot(MyApp);
