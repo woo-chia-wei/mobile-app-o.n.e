@@ -24,6 +24,7 @@ import { NormalUserPage } from '../pages/normal-user/normal-user';
 import { AddDealEventPage } from '../pages/add-event/add-event';
 import { EventServiceProvider } from '../providers/event-service/event-service';
 import { ProfilePage } from '../pages/profile/profile';
+import { EditEventPage } from '../pages/edit-event/edit-event';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -38,7 +39,8 @@ let config = FIREBASE_CREDENTIALS
     BusinessUserPage,
     NormalUserPage,
     AddDealEventPage,
-    ProfilePage
+    ProfilePage,
+    EditEventPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ let config = FIREBASE_CREDENTIALS
     BusinessUserPage,
     NormalUserPage,
     AddDealEventPage,
-    ProfilePage
+    ProfilePage,
+    EditEventPage
   ],
   providers: [
     StatusBar,

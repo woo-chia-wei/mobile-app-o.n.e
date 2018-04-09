@@ -8,6 +8,7 @@ import { Observable } from '@firebase/util';
 import { DealEvent } from '../../models/event';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
 import { ProfilePage } from '../profile/profile';
+import { EditEventPage } from '../edit-event/edit-event';
 
 @IonicPage()
 @Component({
@@ -52,8 +53,10 @@ export class BusinessUserPage {
     this.navCtrl.push(ProfilePage);
   }
 
-  editDealEvent(event: DealEvent){
-
+  editDealEvent(dealEvent: DealEvent){
+    this.navCtrl.push(EditEventPage, {
+      data: dealEvent
+    })
   }
 
   deleteDealEvent(eventId: string){

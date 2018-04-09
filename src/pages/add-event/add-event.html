@@ -34,14 +34,14 @@
     <ion-label stacked>Start From (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="startTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="startTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45" required></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>End At (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="endTime" [min]="getMinDate()" [max]="getMaxDate()" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="endTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45" required></ion-datetime>
   </ion-item>
 
   <ion-item>
