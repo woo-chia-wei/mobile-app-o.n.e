@@ -4,8 +4,46 @@
     <ion-title>Find Great Deal</ion-title>
   </ion-navbar>
 
+  <ion-item>
+    <ion-label stacked>Category</ion-label>
+    <ion-select [(ngModel)]="categoryFilter">
+      <ion-option *ngFor="let category of categories" [value]="category" required>{{category}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Searching Radius ({{radiusFilter}}KM)</ion-label>
+    <ion-range [(ngModel)]="radiusFilter" min="1" max="10" step="1"></ion-range>
+  </ion-item>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-list no-lines>
+
+    <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
+      <ion-item text-wrap no-lines>
+
+        <div item-left>{{truncate(evt.title)}}
+          <br>
+          <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+          <br>
+          <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+        </div>
+        <div item-right [ngClass]="{
+              'event-opening' : getStatus(evt) == 'Opening',
+              'event-closed' : getStatus(evt) == 'Closed',
+              'event-soon' : getStatus(evt) == 'Soon'
+            }">
+          {{getStatus(evt)}}
+        </div>
+
+      </ion-item>
+
+
+    </ion-item-sliding>
+
+  </ion-list>
+
 
 </ion-content>

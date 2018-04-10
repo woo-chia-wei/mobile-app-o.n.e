@@ -50,10 +50,7 @@ export class EditEventPage {
   }
 
   saveEvent(){
-    
-
     try{
-
       this.dealEvent.startTime = new Date(this.startTime).getTime();
       this.dealEvent.endTime = new Date(this.endTime).getTime();
       this.eventService.updateEvent(this.dealEvent);

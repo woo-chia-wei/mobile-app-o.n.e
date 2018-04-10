@@ -7,6 +7,7 @@ import { BusinessUserPage } from '../business-user/business-user';
 import * as moment from 'moment';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { CATEGORIES } from '../../shared/references';
+import { GeoLocation } from '../../models/location';
 
 @IonicPage()
 @Component({
@@ -77,7 +78,7 @@ export class AddDealEventPage {
 
       try{
         
-        let location = this.mapService.getLocation(res);
+        let location = this.mapService.getLocation(res) as GeoLocation;
         this.dealEvent.latitude = location.lat;
         this.dealEvent.longitude = location.lng;
         this.dealEvent.startTime = new Date(this.startTime).getTime();

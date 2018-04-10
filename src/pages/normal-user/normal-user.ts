@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the NormalUserPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { CATEGORIES } from '../../shared/references';
+import { EventServiceProvider } from '../../providers/event-service/event-service';
+import { DealEvent } from '../../models/event';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NormalUserPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private categories: string[] = CATEGORIES;
+  private categoryFilter: string;
+  private radiusFilter: number = 1;
+  private dealEvents: any;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public eventService: EventServiceProvider) {
+    this.categoryFilter = this.categories[0];
+    this.dealEvents = this.eventService.getEventsForCustomer(this.categoryFilter, this.radiusFilter);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NormalUserPage');
+  }
+
+  getStatus(dealEvent: DealEvent){
+    let today = new Date().getTime();
+
+    if(dealEvent.startTime <= today && today <= dealEvent.endTime){
+      return 'Opening';
+    }else if(today > dealEvent.endTime){
+      return 'Closed';
+    }else{
+      return 'Soon';
+    }
+  }
+
+  truncate(text: string){
+    if(text.length > 30){
+      return text.substring(0, 27) + '...';
+    }
+
+    return text;
   }
 
 }

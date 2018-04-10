@@ -19,7 +19,7 @@ import { GoogleMapServiceProvider } from '../../providers/google-map-service/goo
 export class BusinessUserPage {
 
   private user: User = {} as User;
-  private dealEvents: any
+  private dealEvents: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
