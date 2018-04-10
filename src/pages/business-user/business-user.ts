@@ -9,6 +9,7 @@ import { DealEvent } from '../../models/event';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
 import { ProfilePage } from '../profile/profile';
 import { EditEventPage } from '../edit-event/edit-event';
+import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 
 @IonicPage()
 @Component({
@@ -23,10 +24,10 @@ export class BusinessUserPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public userService: UserServiceProvider,
-              public eventService: EventServiceProvider) {
+              public eventService: EventServiceProvider,
+              public mapService: GoogleMapServiceProvider) {
     this.userService.getCurrentUser().subscribe(u => this.user = u as User);
     this.dealEvents = this.eventService.getEvents();
-    
   }
 
   ionViewDidLoad() {

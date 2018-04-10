@@ -25,6 +25,8 @@ import { AddDealEventPage } from '../pages/add-event/add-event';
 import { EventServiceProvider } from '../providers/event-service/event-service';
 import { ProfilePage } from '../pages/profile/profile';
 import { EditEventPage } from '../pages/edit-event/edit-event';
+import { GoogleMapServiceProvider } from '../providers/google-map-service/google-map-service';
+import { HttpClientModule } from '@angular/common/http';
 
 let config = FIREBASE_CREDENTIALS
 
@@ -47,7 +49,8 @@ let config = FIREBASE_CREDENTIALS
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +72,8 @@ let config = FIREBASE_CREDENTIALS
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     DealServiceProvider,
-    EventServiceProvider
+    EventServiceProvider,
+    GoogleMapServiceProvider
   ]
 })
 export class AppModule {}
