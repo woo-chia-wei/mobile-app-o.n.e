@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CATEGORIES } from '../../shared/references';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { DealEvent } from '../../models/event';
+import { GeoLocation } from '../../models/location';
+import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 
 @IonicPage()
 @Component({
@@ -14,13 +16,28 @@ export class NormalUserPage {
   private categories: string[] = CATEGORIES;
   private categoryFilter: string;
   private radiusFilter: number = 1;
-  private dealEvents: any;
+  private dealEvents: DealEvent[];
+  private mainDealEvents: any
+
+  private current: GeoLocation;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public eventService: EventServiceProvider) {
+              public eventService: EventServiceProvider,
+              public mapService: GoogleMapServiceProvider) {
+
+    //For testing only, current location
+    this.current = {
+        lat: 1.317465,
+        lng: 103.898082
+    };
+
     this.categoryFilter = this.categories[0];
-    this.dealEvents = this.eventService.getEventsForCustomer(this.categoryFilter, this.radiusFilter);
+    this.eventService.getEventsForCustomer(this.categoryFilter).subscribe(res => {
+      this.mainDealEvents = res;
+      this.updateList();
+    });
+    
   }
 
   ionViewDidLoad() {
@@ -45,6 +62,23 @@ export class NormalUserPage {
     }
 
     return text;
+  }
+
+  isValidRange(lat1: number, lng1: number, lat2: number, lng2: number, radius: number): boolean{
+    return this.mapService.getDistanceInKM(lat1, lng1, lat2, lng2) <= radius;
+  }
+
+  radiusChanged(){
+    this.updateList();
+  }
+
+  updateList(){
+    this.dealEvents = [];
+    this.mainDealEvents.forEach(e => {
+      if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter)){
+        this.dealEvents.push(e);
+      }
+    });
   }
 
 }

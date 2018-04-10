@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DealEvent } from '../../models/event';
 import * as moment from 'moment';
+import { GeoLocation } from '../../models/location';
 
 @Injectable()
 export class EventServiceProvider {
@@ -32,7 +33,7 @@ export class EventServiceProvider {
     this.db.object('dealEvents/' + dealEvent.id).set(dealEvent);
   }
 
-  getEventsForCustomer(category: string, radius: number){
+  getEventsForCustomer(category: string){ 
     return this.db.list('dealEvents', ref=>ref.orderByChild('category').equalTo(category)).valueChanges();
   }
 

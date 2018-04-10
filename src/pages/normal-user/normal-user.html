@@ -13,7 +13,7 @@
 
   <ion-item>
     <ion-label stacked>Searching Radius ({{radiusFilter}}KM)</ion-label>
-    <ion-range [(ngModel)]="radiusFilter" min="1" max="10" step="1"></ion-range>
+    <ion-range [(ngModel)]="radiusFilter" min="1" max="10" step="1" (ionChange)="radiusChanged()"></ion-range>
   </ion-item>
 </ion-header>
 
@@ -21,7 +21,7 @@
 
   <ion-list no-lines>
 
-    <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
+    <ion-item-sliding no-lines *ngFor="let evt of dealEvents">
       <ion-item text-wrap no-lines>
 
         <div item-left>{{truncate(evt.title)}}
