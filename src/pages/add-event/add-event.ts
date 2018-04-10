@@ -5,6 +5,7 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { BusinessUserPage } from '../business-user/business-user';
 import * as moment from 'moment';
+import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class AddDealEventPage {
               public navParams: NavParams,
               public userService: UserServiceProvider,
               public toastController: ToastController,
-              public eventService: EventServiceProvider) {
+              public eventService: EventServiceProvider,
+              public mapService: GoogleMapServiceProvider) {
     this.dealEvent.category = this.categories[0];
     this.dealEvent.ownerId = this.userService.getCurrentUserId();
   }
@@ -51,9 +53,18 @@ export class AddDealEventPage {
 
   create() {
 
-    if(this.endTime <= this.startTime){
+    let errors: string[] = [];
+
+    if(this.endTime <= this.startTime)
+      errors.push("End time cannot be earlier or equal than start time!");
+
+    let re = /\d{6}/;
+    if(!re.test(this.dealEvent.postalCode))
+      errors.push('Invalid postal code!');
+    
+    if(errors.length > 0){
       this.toastController.create({
-        message: "End time cannot be earlier or equal than start time!",
+        message: errors[0],
         duration: 3000,
         position: 'top'
       }).present();
@@ -61,27 +72,35 @@ export class AddDealEventPage {
       return;
     }
 
-    try{
+    this.mapService.callGeoCodingAPI(this.dealEvent.postalCode).subscribe(res => {
 
-      this.dealEvent.startTime = new Date(this.startTime).getTime();
-      this.dealEvent.endTime = new Date(this.endTime).getTime();
-      this.eventService.addEvent(this.dealEvent);
+      try{
+        
+        let location = this.mapService.getLocation(res);
+        this.dealEvent.latitude = location.lat;
+        this.dealEvent.longitude = location.lng;
+        this.dealEvent.startTime = new Date(this.startTime).getTime();
+        this.dealEvent.endTime = new Date(this.endTime).getTime();
 
-      this.toastController.create({
-        message: "Event added successfully!",
-        duration: 3000,
-        position: 'top'
-      }).present();
+        this.eventService.addEvent(this.dealEvent);
+  
+        this.toastController.create({
+          message: "Event added successfully!",
+          duration: 3000,
+          position: 'top'
+        }).present();
+  
+        this.navCtrl.push(BusinessUserPage);
+      }catch(error){
+        this.toastController.create({
+          message: error,
+          duration: 3000,
+          position: 'top'
+        }).present();
+      }
+    })
 
-      this.navCtrl.push(BusinessUserPage);
-
-    }catch(error){
-      this.toastController.create({
-        message: error,
-        duration: 3000,
-        position: 'top'
-      }).present();
-    }
+   
     
   }
 
