@@ -35,7 +35,6 @@ export class NormalUserPage {
     this.categoryFilter = this.categories[0];
     this.eventService.getEventsForCustomer().subscribe(res => {
       this.mainDealEvents = res;
-      console.log('res', res);
       this.updateList();
     });
     

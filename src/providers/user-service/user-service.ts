@@ -17,8 +17,6 @@ export class UserServiceProvider {
 
   public registerUser(newUser: User){
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then((u) => {
-      console.log('object', `users/${u.uid}`);
-      console.log('user', newUser);
       this.db.object(`users/${u.uid}`).set(newUser);
     });
   }
