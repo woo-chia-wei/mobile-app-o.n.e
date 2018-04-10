@@ -1,0 +1,1 @@
+export const CATEGORIES = ['Food and Beverage', 'Retailer']

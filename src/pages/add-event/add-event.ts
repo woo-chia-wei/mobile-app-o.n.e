@@ -6,6 +6,7 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 import { BusinessUserPage } from '../business-user/business-user';
 import * as moment from 'moment';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
+import { CATEGORIES } from '../../shared/references';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ import { GoogleMapServiceProvider } from '../../providers/google-map-service/goo
 })
 export class AddDealEventPage {
 
-  private categories: string[] = ['Food and Beverage', 'Retailer'];
+  private categories: string[] = CATEGORIES;
   private dealEvent: DealEvent = {} as DealEvent;
   private startTime: Date;
   private endTime: Date;

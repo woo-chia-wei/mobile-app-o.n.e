@@ -4,6 +4,7 @@ import { DealEvent } from '../../models/event';
 import * as moment from 'moment';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { BusinessUserPage } from '../business-user/business-user';
+import { CATEGORIES } from '../../shared/references';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ import { BusinessUserPage } from '../business-user/business-user';
 })
 export class EditEventPage {
 
-  private categories: string[] = ['Food and Beverage', 'Retailer'];
+  private categories: string[] = CATEGORIES;
   private dealEvent: DealEvent = {} as DealEvent;
   private startTime: any;
   private endTime: any;
