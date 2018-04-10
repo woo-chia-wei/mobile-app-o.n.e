@@ -6,7 +6,7 @@
 
   <ion-item>
     <ion-label stacked>Category</ion-label>
-    <ion-select [(ngModel)]="categoryFilter">
+    <ion-select [(ngModel)]="categoryFilter" (ionChange)="categoryChanged()">
       <ion-option *ngFor="let category of categories" [value]="category" required>{{category}}</ion-option>
     </ion-select>
   </ion-item>

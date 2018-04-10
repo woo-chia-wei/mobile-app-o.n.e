@@ -33,8 +33,8 @@ export class EventServiceProvider {
     this.db.object('dealEvents/' + dealEvent.id).set(dealEvent);
   }
 
-  getEventsForCustomer(category: string){ 
-    return this.db.list('dealEvents', ref=>ref.orderByChild('category').equalTo(category)).valueChanges();
+  getEventsForCustomer(){ 
+    return this.db.list('dealEvents').valueChanges();
   }
 
 }

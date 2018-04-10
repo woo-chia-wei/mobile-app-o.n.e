@@ -33,8 +33,9 @@ export class NormalUserPage {
     };
 
     this.categoryFilter = this.categories[0];
-    this.eventService.getEventsForCustomer(this.categoryFilter).subscribe(res => {
+    this.eventService.getEventsForCustomer().subscribe(res => {
       this.mainDealEvents = res;
+      console.log('res', res);
       this.updateList();
     });
     
@@ -72,13 +73,20 @@ export class NormalUserPage {
     this.updateList();
   }
 
+  categoryChanged(){
+    this.updateList();
+  }
+
   updateList(){
     this.dealEvents = [];
     this.mainDealEvents.forEach(e => {
-      if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter)){
+      if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter) &&
+        this.categoryFilter == e['category']){
         this.dealEvents.push(e);
       }
     });
   }
+
+  
 
 }
