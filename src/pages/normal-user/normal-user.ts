@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CATEGORIES } from '../../shared/references';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
@@ -7,12 +7,17 @@ import { GeoLocation } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { ProfilePage } from '../profile/profile';
 
+declare var google;
+
 @IonicPage()
 @Component({
   selector: 'page-normal-user',
   templateUrl: 'normal-user.html',
 })
 export class NormalUserPage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  private map: any;
 
   private categories: string[] = CATEGORIES;
   private categoryFilter: string;
@@ -37,12 +42,40 @@ export class NormalUserPage {
     this.eventService.getEventsForCustomer().subscribe(res => {
       this.mainDealEvents = res;
       this.updateList();
+      this.loadMap();
     });
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NormalUserPage');
+  }
+
+  loadMap(){
+    
+    this.map = null;
+
+    let mapOptions = {
+      center: new google.maps.LatLng(this.current.lat, this.current.lng),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    this.addMarker(this.current.lat, this.current.lng);
+    this.dealEvents.forEach(dealEvent => {
+      this.addMarker(dealEvent.latitude, dealEvent.longitude);
+    });
+ 
+  }
+
+  addMarker(lat: number, lng: number){
+    let marker = new google.maps.Marker({
+      position: new google.maps.LatLng(lat, lng),
+    });
+    
+    marker.setMap(this.map);
   }
 
   getStatus(dealEvent: DealEvent){
@@ -58,8 +91,8 @@ export class NormalUserPage {
   }
 
   truncate(text: string){
-    if(text.length > 30){
-      return text.substring(0, 27) + '...';
+    if(text.length > 25){
+      return text.substring(0, 22) + '...';
     }
 
     return text;
@@ -71,10 +104,12 @@ export class NormalUserPage {
 
   radiusChanged(){
     this.updateList();
+    this.loadMap();
   }
 
   categoryChanged(){
     this.updateList();
+    this.loadMap();
   }
 
   updateList(){

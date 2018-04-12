@@ -65,8 +65,8 @@ export class BusinessUserPage {
   }
 
   truncate(text: string){
-    if(text.length > 30){
-      return text.substring(0, 27) + '...';
+    if(text.length > 25){
+      return text.substring(0, 22) + '...';
     }
 
     return text;
