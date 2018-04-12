@@ -5,6 +5,7 @@ import { EventServiceProvider } from '../../providers/event-service/event-servic
 import { DealEvent } from '../../models/event';
 import { GeoLocation } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
+import { ProfilePage } from '../profile/profile';
 
 @IonicPage()
 @Component({
@@ -86,6 +87,8 @@ export class NormalUserPage {
     });
   }
 
-  
+  redirectToProfilePage(){
+    this.navCtrl.push(ProfilePage);
+  }
 
 }
