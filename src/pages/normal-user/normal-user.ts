@@ -63,19 +63,31 @@ export class NormalUserPage {
  
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    this.addMarker(this.current.lat, this.current.lng);
-    this.dealEvents.forEach(dealEvent => {
-      this.addMarker(dealEvent.latitude, dealEvent.longitude);
+    this.addCenterMarker(this.current.lat, this.current.lng);
+
+    this.dealEvents.forEach((dealEvent, index) => {
+      this.addEventMarker(dealEvent.latitude, dealEvent.longitude, (index + 1).toString());
     });
  
   }
 
-  addMarker(lat: number, lng: number){
+  addEventMarker(lat: number, lng: number, display: string){
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(lat, lng),
+      icon: `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=${display}|FF776B|000000`,
+      map: this.map
     });
-    
-    marker.setMap(this.map);
+  }
+  
+  addCenterMarker(lat: number, lng: number){
+    let marker = new google.maps.Marker({
+      position: new google.maps.LatLng(lat, lng),
+      icon: {
+        url: 'https://maps.google.com/mapfiles/kml/shapes/man.png',
+        scaledSize: new google.maps.Size(30, 30),
+      },
+      map: this.map
+    });
   }
 
   getStatus(dealEvent: DealEvent){
