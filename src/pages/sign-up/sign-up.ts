@@ -59,4 +59,8 @@ export class SignUpPage {
     }
   }
 
+  redirectToApp(){
+    this.navCtrl.push(MyApp);
+  }
+
 }

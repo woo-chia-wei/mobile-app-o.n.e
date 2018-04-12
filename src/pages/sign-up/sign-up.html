@@ -1,5 +1,11 @@
 <ion-header>
   <ion-navbar color="primary" hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="redirectToApp()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>Create new Account</ion-title>
   </ion-navbar>
 </ion-header>
@@ -28,7 +34,7 @@
   </ion-item>
 
   <div padding text-center>
-    <button  [disabled]="!(user.email && user.password && user.contact)" ion-button round (click)="register(user)" color="danger">Create Account</button>
+    <button [disabled]="!(user.email && user.password && user.contact)" ion-button round (click)="register(user)" color="danger">Create Account</button>
   </div>
 
 </ion-content>
