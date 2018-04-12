@@ -10,14 +10,14 @@
     <ion-title>Find Great Deal</ion-title>
   </ion-navbar>
 
-  <ion-item>
+  <ion-item class="normal-user-filter"> 
     <ion-label stacked>Category</ion-label>
     <ion-select [(ngModel)]="categoryFilter" (ionChange)="categoryChanged()">
       <ion-option *ngFor="let category of categories" [value]="category" required>{{category}}</ion-option>
     </ion-select>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="normal-user-filter">
     <ion-label stacked>Searching Radius ({{radiusFilter}}KM)</ion-label>
     <ion-range [(ngModel)]="radiusFilter" min="1" max="10" step="1" (ionChange)="radiusChanged()"></ion-range>
   </ion-item>
@@ -27,10 +27,11 @@
 
   <ion-list no-lines>
 
-    <ion-item-sliding no-lines *ngFor="let evt of dealEvents">
+    <ion-item-sliding no-lines *ngFor="let evt of dealEvents; let i = index">
       <ion-item text-wrap no-lines>
 
-        <div item-left>{{truncate(evt.title)}}
+        <div item-left>
+          <div class="truncate"><span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
           <br>
           <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
           <br>

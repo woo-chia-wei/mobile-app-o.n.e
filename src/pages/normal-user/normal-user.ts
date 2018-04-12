@@ -90,14 +90,6 @@ export class NormalUserPage {
     }
   }
 
-  truncate(text: string){
-    if(text.length > 25){
-      return text.substring(0, 22) + '...';
-    }
-
-    return text;
-  }
-
   isValidRange(lat1: number, lng1: number, lat2: number, lng2: number, radius: number): boolean{
     return this.mapService.getDistanceInKM(lat1, lng1, lat2, lng2) <= radius;
   }

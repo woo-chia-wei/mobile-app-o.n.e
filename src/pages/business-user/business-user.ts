@@ -64,12 +64,4 @@ export class BusinessUserPage {
     this.eventService.deleteEvent(eventId);
   }
 
-  truncate(text: string){
-    if(text.length > 25){
-      return text.substring(0, 22) + '...';
-    }
-
-    return text;
-  }
-
 }

@@ -14,3 +14,47 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.index-title{
+    color: cadetblue;
+    font-weight: bold;
+}
+
+.event-date{
+    font-size: small;
+    font-style: italic;
+    color: grey;
+}
+
+.event-soon{
+    color:#EBEB00
+}
+
+.event-opening{
+    color:green;
+}
+
+.event-closed{
+    color:red;
+}
+
+.mandatory{
+    color:red;
+}
+
+.business-label{
+    font-weight: 100;
+    font-size: smaller;
+}
+
+.normal-user-filter{
+    background: #f7f7f7;
+}
+
+.truncate {
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}

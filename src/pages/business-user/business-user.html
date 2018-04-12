@@ -24,10 +24,11 @@
   
   <ion-list no-lines>
 
-    <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async">
+    <ion-item-sliding no-lines *ngFor="let evt of dealEvents | async; let i = index">
       <ion-item text-wrap no-lines>
 
-        <div item-left>{{truncate(evt.title)}}
+        <div item-left>
+          <div class="truncate"><span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
           <br>
           <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
           <br>
