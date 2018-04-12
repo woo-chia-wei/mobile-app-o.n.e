@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { CATEGORIES } from '../../shared/references';
 import { GeoLocation } from '../../models/location';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -101,9 +102,10 @@ export class AddDealEventPage {
         }).present();
       }
     })
+  }
 
-   
-    
+  redirectToApp(){
+    this.navCtrl.push(MyApp);
   }
 
 }

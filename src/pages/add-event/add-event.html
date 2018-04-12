@@ -1,6 +1,12 @@
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="primary" hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="redirectToApp()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>Add Business Event</ion-title>
   </ion-navbar>
 
@@ -34,14 +40,16 @@
     <ion-label stacked>Start From (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="startTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="startTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45"
+      required></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>End At (MM/DD/YYYY HH:mm)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="endTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45" required></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" [(ngModel)]="endTime" [min]="getMinDate()" [max]="getMaxDate()" minuteValues="0,15,30,45"
+      required></ion-datetime>
   </ion-item>
 
   <ion-item>
@@ -50,12 +58,16 @@
   </ion-item>
 
   <ion-item>
-      <ion-label stacked>Address <span class="mandatory">*</span></ion-label>
-      <ion-input type="text" [(ngModel)]="dealEvent.address"></ion-input>
-    </ion-item>
+    <ion-label stacked>Address
+      <span class="mandatory">*</span>
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="dealEvent.address"></ion-input>
+  </ion-item>
 
   <ion-item>
-    <ion-label stacked>Postal Code <span class="mandatory">*</span></ion-label>
+    <ion-label stacked>Postal Code
+      <span class="mandatory">*</span>
+    </ion-label>
     <ion-input type="text" [(ngModel)]="dealEvent.postalCode"></ion-input>
   </ion-item>
 

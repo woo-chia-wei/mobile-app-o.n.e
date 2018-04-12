@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { BusinessUserPage } from '../business-user/business-user';
 import { CATEGORIES } from '../../shared/references';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -70,6 +71,10 @@ export class EditEventPage {
         position: 'top'
       }).present();
     }
+  }
+
+  redirectToApp(){
+    this.navCtrl.push(MyApp);
   }
 
 }
