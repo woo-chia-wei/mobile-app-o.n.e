@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DealEvent } from '../../models/event';
 import * as moment from 'moment';
-import { GeoLocation } from '../../models/location';
+import { GeoPosition } from '../../models/location';
 
 @Injectable()
 export class EventServiceProvider {

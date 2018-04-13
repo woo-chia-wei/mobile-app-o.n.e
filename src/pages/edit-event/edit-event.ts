@@ -7,7 +7,7 @@ import { BusinessUserPage } from '../business-user/business-user';
 import { CATEGORIES } from '../../shared/references';
 import { MyApp } from '../../app/app.component';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
-import { GeoLocation } from '../../models/location';
+import { GeoPosition } from '../../models/location';
 
 declare var google;
 
@@ -104,7 +104,7 @@ export class EditEventPage {
 
     this.mapService.callGeoCodingAPI(this.dealEvent.postalCode).subscribe(res => {
 
-      let location = this.mapService.getLocation(res) as GeoLocation;
+      let location = this.mapService.getLocation(res) as GeoPosition;
 
       console.log('Found location', location);
 

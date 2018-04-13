@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CATEGORIES } from '../../shared/references';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { DealEvent } from '../../models/event';
-import { GeoLocation } from '../../models/location';
+import { GeoPosition } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { ProfilePage } from '../profile/profile';
 
@@ -25,7 +25,7 @@ export class NormalUserPage {
   private dealEvents: DealEvent[];
   private mainDealEvents: any
 
-  private current: GeoLocation;
+  private current: GeoPosition;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
