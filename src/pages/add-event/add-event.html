@@ -65,11 +65,13 @@
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Postal Code
+    <ion-label stacked>Postal Code (6 digits)
       <span class="mandatory">*</span>
     </ion-label>
-    <ion-input type="text" [(ngModel)]="dealEvent.postalCode"></ion-input>
+    <ion-input type="text" [(ngModel)]="dealEvent.postalCode" (ionChange)='postalCodeChanged()'></ion-input>
   </ion-item>
+
+  <div #map id="map" *ngIf="isValidPostalCode()"></div> 
 
   <div padding text-center>
     <button [disabled]="!validate()" ion-button round (click)="create(dealEvent)" color="danger">Create Event</button>

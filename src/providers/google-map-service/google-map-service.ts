@@ -16,6 +16,7 @@ export class GoogleMapServiceProvider {
   }
 
   public callGeoCodingAPI(postalCode: string){
+    console.log('call API', `https://maps.googleapis.com/maps/api/geocode/json?address=Singapore ${postalCode}&key=${GOOGLE_MAP_API_KEY}`);
     return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=Singapore ${postalCode}&key=${GOOGLE_MAP_API_KEY}`);
   }
 
