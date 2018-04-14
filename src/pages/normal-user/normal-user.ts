@@ -6,6 +6,8 @@ import { DealEvent } from '../../models/event';
 import { GeoPosition } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { ProfilePage } from '../profile/profile';
+import { Geolocation } from '@ionic-native/geolocation';
+import { USE_GPS, CURRENT_LOCATION} from '../../app/current.location';
 
 declare var google;
 
@@ -24,19 +26,25 @@ export class NormalUserPage {
   private radiusFilter: number = 1;
   private dealEvents: DealEvent[];
   private mainDealEvents: any
+  private obtainedFirstPosition: boolean = false;
 
   private current: GeoPosition;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public eventService: EventServiceProvider,
-              public mapService: GoogleMapServiceProvider) {
+              public mapService: GoogleMapServiceProvider,
+              public geolocation: Geolocation) {
 
-    //For testing only, current location
-    this.current = {
-        lat: 1.317465,
-        lng: 103.898082
-    };
+    if(USE_GPS){
+      this.GetCurrentLocation();
+    }else{
+      this.current = {
+        lat: CURRENT_LOCATION.lat,
+        lng: CURRENT_LOCATION.lng
+      }
+      this.obtainedFirstPosition = true;
+    }
 
     this.categoryFilter = this.categories[0];
     this.eventService.getEventsForCustomer().subscribe(res => {
@@ -47,12 +55,29 @@ export class NormalUserPage {
     
   }
 
+  GetCurrentLocation(){
+    console.log('Called GetCurrentLocation()');
+    this.geolocation.getCurrentPosition({timeout:10000}).then(location => {
+      console.log('Found location', location)
+      this.current = {
+        lat: location['coord']['latitude'],
+        lng: location['coord']['longitude']
+      }
+      this.obtainedFirstPosition = true;
+    }).catch(error => {
+      console.error('Failure on getting current location', error);
+      this.GetCurrentLocation();
+    });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad NormalUserPage');
   }
 
   loadMap(){
-    
+
+    if(!this.obtainedFirstPosition) return;
+
     this.map = null;
 
     let mapOptions = {
@@ -117,6 +142,9 @@ export class NormalUserPage {
   }
 
   updateList(){
+
+    if(!this.obtainedFirstPosition) return;
+
     this.dealEvents = [];
     this.mainDealEvents.forEach(e => {
       if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter) &&

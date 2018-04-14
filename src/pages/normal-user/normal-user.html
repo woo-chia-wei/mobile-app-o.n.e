@@ -1,16 +1,22 @@
 <ion-header>
 
   <ion-navbar color="primary" hideBackButton="true">
-      <ion-buttons start>
-          <button ion-button icon-only (click)="redirectToProfilePage()">
-            <ion-icon name="md-person"></ion-icon>
-          </button>
-        </ion-buttons>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="redirectToProfilePage()">
+        <ion-icon name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
 
     <ion-title>Find Great Deal</ion-title>
+
+    <ion-buttons *ngIf="USE_GPS" end>
+      <button ion-button icon-only (click)="GetCurrentLocation()">
+        <ion-icon name="md-refresh"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
-  <ion-item class="normal-user-filter"> 
+  <ion-item class="normal-user-filter">
     <ion-label stacked>Category</ion-label>
     <ion-select [(ngModel)]="categoryFilter" (ionChange)="categoryChanged()">
       <ion-option *ngFor="let category of categories" [value]="category" required>{{category}}</ion-option>
@@ -31,7 +37,8 @@
       <ion-item text-wrap no-lines>
 
         <div item-left>
-          <div class="truncate"><span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
+          <div class="truncate">
+            <span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
           <br>
           <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
           <br>
@@ -52,6 +59,6 @@
 
   </ion-list>
 
-  <div #map id="map"></div> 
+  <div #map id="map"></div>
 
 </ion-content>

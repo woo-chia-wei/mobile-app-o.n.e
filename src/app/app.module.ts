@@ -27,6 +27,9 @@ import { EditEventPage } from '../pages/edit-event/edit-event';
 import { GoogleMapServiceProvider } from '../providers/google-map-service/google-map-service';
 import { HttpClientModule } from '@angular/common/http';
 
+import { Geolocation } from '@ionic-native/geolocation';
+import { Device } from '@ionic-native/device';
+
 let config = FIREBASE_CREDENTIALS
 
 @NgModule({
@@ -70,7 +73,9 @@ let config = FIREBASE_CREDENTIALS
     UserServiceProvider,
     DealServiceProvider,
     EventServiceProvider,
-    GoogleMapServiceProvider
+    GoogleMapServiceProvider,
+    Geolocation,
+    Device
   ]
 })
 export class AppModule {}
