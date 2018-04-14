@@ -13,7 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { FIREBASE_CREDENTIALS } from './firebase.credentials';
+import { FIREBASE_CREDENTIALS } from '../environment/firebase.credentials';
 import { ShareDealPage } from '../pages/share-deal/share-deal';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';

@@ -7,7 +7,7 @@ import { GeoPosition } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { ProfilePage } from '../profile/profile';
 import { Geolocation } from '@ionic-native/geolocation';
-import { USE_GPS, CURRENT_LOCATION} from '../../app/current.location';
+import { USE_GPS, CURRENT_LOCATION} from '../../environment/current.location';
 
 declare var google;
 

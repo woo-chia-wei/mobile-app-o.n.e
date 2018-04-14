@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GOOGLE_MAP_API_KEY } from '../../app/google.map.credentials';
+import { GOOGLE_MAP_API_KEY } from '../../environment/google.map.credentials';
 
 /*
   Generated class for the GoogleMapServiceProvider provider.
