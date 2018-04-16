@@ -106,8 +106,6 @@ export class NormalUserPage {
       center: new google.maps.LatLng(this.current.lat, this.current.lng),
       zoom: zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      // fullscreenControl: false,
-      // streetViewControl: false,
       disableDefaultUI: true
     }
  

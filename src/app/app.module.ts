@@ -7,14 +7,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-import { DealServiceProvider } from '../providers/deal-service/deal-service';
 import { LoginPage } from '../pages/login/login';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { FIREBASE_CREDENTIALS } from '../environment/firebase.credentials';
-import { ShareDealPage } from '../pages/share-deal/share-deal';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignUpPage } from '../pages/sign-up/sign-up';
@@ -37,7 +35,6 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    ShareDealPage,
     SignUpPage,
     BusinessUserPage,
     NormalUserPage,
@@ -58,7 +55,6 @@ let config = FIREBASE_CREDENTIALS
     MyApp,
     HomePage,
     LoginPage,
-    ShareDealPage,
     SignUpPage,
     BusinessUserPage,
     NormalUserPage,
@@ -71,7 +67,6 @@ let config = FIREBASE_CREDENTIALS
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
-    DealServiceProvider,
     EventServiceProvider,
     GoogleMapServiceProvider,
     Geolocation,
