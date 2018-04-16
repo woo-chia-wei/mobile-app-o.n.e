@@ -80,9 +80,31 @@ export class NormalUserPage {
 
     this.map = null;
 
+    let zoom = 14;
+    switch(this.radiusFilter){
+      case 1:
+        zoom = 14;
+        break;
+      case 2:
+      case 3:
+        zoom = 13;
+        break;
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+        zoom = 12;
+        break;
+      case 8:
+      case 9:
+      case 10:
+        zoom = 11;
+        break;
+    }
+
     let mapOptions = {
       center: new google.maps.LatLng(this.current.lat, this.current.lng),
-      zoom: 15,
+      zoom: zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
  
@@ -92,6 +114,17 @@ export class NormalUserPage {
 
     this.dealEvents.forEach((dealEvent, index) => {
       this.addEventMarker(dealEvent.latitude, dealEvent.longitude, (index + 1).toString());
+    });
+
+    var cityCircle = new google.maps.Circle({
+      strokeColor: '#535399',
+      strokeOpacity: 0.8,
+      strokeWeight: 1,
+      fillColor: '#a3d4ff',
+      fillOpacity: 0.5,
+      map: this.map,
+      center: new google.maps.LatLng(this.current.lat, this.current.lng),
+      radius: 1000 * this.radiusFilter
     });
  
   }
