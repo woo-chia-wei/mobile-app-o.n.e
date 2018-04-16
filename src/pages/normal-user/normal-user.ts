@@ -2,12 +2,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CATEGORIES } from '../../shared/references';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
-import { DealEvent } from '../../models/event';
+import { DealEvent, DealEventView } from '../../models/event';
 import { GeoPosition } from '../../models/location';
 import { GoogleMapServiceProvider } from '../../providers/google-map-service/google-map-service';
 import { ProfilePage } from '../profile/profile';
 import { Geolocation } from '@ionic-native/geolocation';
 import { USE_GPS, CURRENT_LOCATION} from '../../environment/current.location';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 declare var google;
 
@@ -24,7 +25,7 @@ export class NormalUserPage {
   private categories: string[] = CATEGORIES;
   private categoryFilter: string;
   private radiusFilter: number = 1;
-  private dealEvents: DealEvent[] = [];
+  private dealEventViews: DealEventView[] = [];
   private mainDealEvents: any
   private obtainedFirstPosition: boolean = false;
 
@@ -34,7 +35,8 @@ export class NormalUserPage {
               public navParams: NavParams,
               public eventService: EventServiceProvider,
               public mapService: GoogleMapServiceProvider,
-              public geolocation: Geolocation) {
+              public geolocation: Geolocation,
+              public userService: UserServiceProvider) {
 
     if(USE_GPS){
       this.GetCurrentLocation();
@@ -113,8 +115,8 @@ export class NormalUserPage {
 
     this.addCenterMarker(this.current.lat, this.current.lng);
 
-    this.dealEvents.forEach((dealEvent, index) => {
-      this.addEventMarker(dealEvent.latitude, dealEvent.longitude, (index + 1).toString());
+    this.dealEventViews.forEach((dealEventView, index) => {
+      this.addEventMarker(dealEventView.latitude, dealEventView.longitude, (index + 1).toString());
     });
 
     var cityCircle = new google.maps.Circle({
@@ -149,12 +151,12 @@ export class NormalUserPage {
     });
   }
 
-  getStatus(dealEvent: DealEvent){
+  getStatus(dealEventView: DealEventView){
     let today = new Date().getTime();
 
-    if(dealEvent.startTime <= today && today <= dealEvent.endTime){
+    if(dealEventView.startTime <= today && today <= dealEventView.endTime){
       return 'Open';
-    }else if(today > dealEvent.endTime){
+    }else if(today > dealEventView.endTime){
       return 'Closed';
     }else{
       return 'Upcoming';
@@ -179,11 +181,34 @@ export class NormalUserPage {
 
     if(!this.obtainedFirstPosition) return;
 
-    this.dealEvents = [];
+    this.dealEventViews = [];
     this.mainDealEvents.forEach(e => {
       if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter) &&
         this.categoryFilter == e['category']){
-        this.dealEvents.push(e);
+        
+        let dealEventView: DealEventView = {
+          id: e['id'],
+          title:  e['title'],
+          description:  e['description'],
+          postalCode:  e['postalCode'],
+          ownerId:  e['ownerId'],
+          category: e['category'],
+          startTime: e['startTime'],
+          endTime: e['endTime'],
+          url:  e['url'],
+          address:  e['address'],
+          longitude: e['longitude'],
+          latitude:  e['latitude'],
+          favourite:  e['favourite']
+        }
+
+        if(e['favourites']){
+          dealEventView.favourite = (this.userService.getCurrentUserId() in e['favourites'])
+        }else{
+          dealEventView.favourite = false;
+        }
+
+        this.dealEventViews.push(dealEventView);
       }
     });
   }
@@ -193,13 +218,32 @@ export class NormalUserPage {
   }
 
   showResultStatement(): string{
-    if(this.dealEvents.length == 0){
+    if(this.dealEventViews.length == 0){
       return "No result is found."
-    }else if(this.dealEvents.length == 1){
+    }else if(this.dealEventViews.length == 1){
       return "1 result is found."
     }else{
-      return this.dealEvents.length + " results is found."
+      return this.dealEventViews.length + " results is found."
     }
+  }
+
+  toggleFavourite(dealEventView: DealEventView){
+    dealEventView.favourite = !dealEventView.favourite;
+    let isFavourite = dealEventView.favourite;
+
+    let dealEvent = this.mainDealEvents.find(x => x['id'] == dealEventView.id);
+    let favourites = dealEvent['favourites'];
+
+    if(!dealEvent['favourites'])
+      dealEvent['favourites'] = {}
+
+    if(isFavourite){
+      dealEvent['favourites'][this.userService.getCurrentUserId()] = true;
+    }else{  
+      delete dealEvent['favourites'][this.userService.getCurrentUserId()]
+    }
+
+    this.eventService.updateEvent(dealEvent);
   }
 
 }

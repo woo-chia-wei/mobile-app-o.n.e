@@ -90,6 +90,8 @@ export class AddDealEventPage {
         this.dealEvent.longitude = location.lng;
         this.dealEvent.startTime = new Date(this.startTime).getTime();
         this.dealEvent.endTime = new Date(this.endTime).getTime();
+        this.dealEvent.createdTime = new Date().getTime();
+        this.dealEvent.favourites = {}
 
         this.eventService.addEvent(this.dealEvent);
   

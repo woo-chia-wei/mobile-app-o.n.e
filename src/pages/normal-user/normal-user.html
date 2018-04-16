@@ -29,8 +29,8 @@
   </ion-item>
 
   <ion-item text-center [ngClass]="{
-    'search-no-result' : dealEvents.length == 0,
-    'search-has-result' : dealEvents.length > 0
+    'search-no-result' : dealEventViews.length == 0,
+    'search-has-result' : dealEventViews.length > 0
   }">
     <ion-label>{{showResultStatement()}}</ion-label>
   </ion-item>
@@ -42,30 +42,30 @@
 
     <ion-list no-lines>
 
-        <ion-item  no-lines *ngFor="let evt of dealEvents; let i = index">
+      <ion-item no-lines *ngFor="let evt of dealEventViews; let i = index">
+        <div item-left (click)="toggleFavourite(evt)">
+          <ion-icon name="ios-star-outline" *ngIf="!evt.favourite"></ion-icon>
+          <ion-icon name="ios-star" *ngIf="evt.favourite"></ion-icon>
+        </div>
 
-          <div item-left>
-            <ion-icon name="ios-star-outline"></ion-icon>
-          </div>
-
-          <div item-left>
-            <div class="truncate">
-              <span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
-            <br>
-            <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
-            <br>
-            <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
-          </div>
-          <div item-right [ngClass]="{
+        <div item-left>
+          <div class="truncate">
+            <span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
+          <br>
+          <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+          <br>
+          <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+        </div>
+        <div item-right [ngClass]="{
               'event-open' : getStatus(evt) == 'Open',
               'event-closed' : getStatus(evt) == 'Closed',
               'event-upcoming' : getStatus(evt) == 'Upcoming',
               'event-reposition': true
             }">
-            {{getStatus(evt)}}
-          </div>
+          {{getStatus(evt)}}
+        </div>
 
-        </ion-item>
+      </ion-item>
 
 
     </ion-list>
