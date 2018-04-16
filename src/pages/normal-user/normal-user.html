@@ -42,8 +42,11 @@
 
     <ion-list no-lines>
 
-      <ion-item-sliding no-lines *ngFor="let evt of dealEvents; let i = index">
-        <ion-item text-wrap no-lines>
+        <ion-item  no-lines *ngFor="let evt of dealEvents; let i = index">
+
+          <div item-left>
+            <ion-icon name="ios-star-outline"></ion-icon>
+          </div>
 
           <div item-left>
             <div class="truncate">
@@ -56,14 +59,14 @@
           <div item-right [ngClass]="{
               'event-open' : getStatus(evt) == 'Open',
               'event-closed' : getStatus(evt) == 'Closed',
-              'event-upcoming' : getStatus(evt) == 'Upcoming'
+              'event-upcoming' : getStatus(evt) == 'Upcoming',
+              'event-reposition': true
             }">
             {{getStatus(evt)}}
           </div>
 
         </ion-item>
 
-      </ion-item-sliding>
 
     </ion-list>
 
