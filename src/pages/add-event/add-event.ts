@@ -91,7 +91,7 @@ export class AddDealEventPage {
         this.dealEvent.startTime = new Date(this.startTime).getTime();
         this.dealEvent.endTime = new Date(this.endTime).getTime();
         this.dealEvent.createdTime = new Date().getTime();
-        this.dealEvent.favourites = {}
+        this.dealEvent.attendees = {}
 
         this.eventService.addEvent(this.dealEvent);
   

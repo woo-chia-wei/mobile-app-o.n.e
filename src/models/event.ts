@@ -12,7 +12,7 @@ export interface DealEvent{
     longitude: number,
     latitude: number,
     createdTime: number,
-    favourites: {}
+    attendees: {}
 }
 
 export interface DealEventView{
@@ -28,5 +28,5 @@ export interface DealEventView{
     address: string,
     longitude: number,
     latitude: number,
-    favourite: boolean
+    attending: boolean
 }

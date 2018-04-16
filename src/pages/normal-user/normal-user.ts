@@ -199,14 +199,12 @@ export class NormalUserPage {
           address:  e['address'],
           longitude: e['longitude'],
           latitude:  e['latitude'],
-          favourite:  e['favourite']
+          attending:  false
         }
 
-        if(e['favourites']){
-          dealEventView.favourite = (this.userService.getCurrentUserId() in e['favourites'])
-        }else{
-          dealEventView.favourite = false;
-        }
+        if(e['attendees'])
+          dealEventView.attending = (this.userService.getCurrentUserId() in e['attendees'])
+        
 
         this.dealEventViews.push(dealEventView);
       }
@@ -227,20 +225,18 @@ export class NormalUserPage {
     }
   }
 
-  toggleFavourite(dealEventView: DealEventView){
-    dealEventView.favourite = !dealEventView.favourite;
-    let isFavourite = dealEventView.favourite;
+  toggleAttendance(dealEventView: DealEventView){
+    dealEventView.attending = !dealEventView.attending;
 
     let dealEvent = this.mainDealEvents.find(x => x['id'] == dealEventView.id);
-    let favourites = dealEvent['favourites'];
 
-    if(!dealEvent['favourites'])
-      dealEvent['favourites'] = {}
+    if(!dealEvent['attendees'])
+      dealEvent['attendees'] = {}
 
-    if(isFavourite){
-      dealEvent['favourites'][this.userService.getCurrentUserId()] = true;
+    if(dealEventView.attending){
+      dealEvent['attendees'][this.userService.getCurrentUserId()] = true;
     }else{  
-      delete dealEvent['favourites'][this.userService.getCurrentUserId()]
+      delete dealEvent['attendees'][this.userService.getCurrentUserId()]
     }
 
     this.eventService.updateEvent(dealEvent);
