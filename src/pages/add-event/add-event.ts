@@ -138,7 +138,8 @@ export class AddDealEventPage {
       let mapOptions = {
         center: new google.maps.LatLng(location.lat, location.lng),
         zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
