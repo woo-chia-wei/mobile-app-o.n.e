@@ -24,7 +24,7 @@ export class NormalUserPage {
   private categories: string[] = CATEGORIES;
   private categoryFilter: string;
   private radiusFilter: number = 1;
-  private dealEvents: DealEvent[];
+  private dealEvents: DealEvent[] = [];
   private mainDealEvents: any
   private obtainedFirstPosition: boolean = false;
 
@@ -156,6 +156,16 @@ export class NormalUserPage {
 
   redirectToProfilePage(){
     this.navCtrl.push(ProfilePage);
+  }
+
+  showResultStatement(): string{
+    if(this.dealEvents.length == 0){
+      return "No result is found."
+    }else if(this.dealEvents.length == 1){
+      return "1 result is found."
+    }else{
+      return this.dealEvents.length + " results is found."
+    }
   }
 
 }
