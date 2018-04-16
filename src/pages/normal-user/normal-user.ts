@@ -119,11 +119,11 @@ export class NormalUserPage {
     let today = new Date().getTime();
 
     if(dealEvent.startTime <= today && today <= dealEvent.endTime){
-      return 'Opening';
+      return 'Open';
     }else if(today > dealEvent.endTime){
       return 'Closed';
     }else{
-      return 'Soon';
+      return 'Upcoming';
     }
   }
 

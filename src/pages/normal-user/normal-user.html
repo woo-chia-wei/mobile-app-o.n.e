@@ -45,9 +45,9 @@
           <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
         </div>
         <div item-right [ngClass]="{
-              'event-opening' : getStatus(evt) == 'Opening',
+              'event-open' : getStatus(evt) == 'Open',
               'event-closed' : getStatus(evt) == 'Closed',
-              'event-soon' : getStatus(evt) == 'Soon'
+              'event-upcoming' : getStatus(evt) == 'Upcoming'
             }">
           {{getStatus(evt)}}
         </div>
