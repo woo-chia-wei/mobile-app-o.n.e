@@ -221,7 +221,7 @@ export class NormalUserPage {
     }else if(this.dealEventViews.length == 1){
       return "1 result is found."
     }else{
-      return this.dealEventViews.length + " results is found."
+      return this.dealEventViews.length + " results are found."
     }
   }
 
