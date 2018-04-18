@@ -28,5 +28,6 @@ export interface DealEventView{
     address: string,
     longitude: number,
     latitude: number,
-    attending: boolean
+    attending: boolean,
+    distance: number
 }

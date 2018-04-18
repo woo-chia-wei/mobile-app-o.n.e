@@ -182,9 +182,12 @@ export class NormalUserPage {
     if(!this.obtainedFirstPosition) return;
 
     this.dealEventViews = [];
+    let today = new Date().getTime();
+
     this.mainDealEvents.forEach(e => {
       if(this.isValidRange(this.current.lat, this.current.lng, e['latitude'], e['longitude'], this.radiusFilter) &&
-        this.categoryFilter == e['category']){
+        this.categoryFilter == e['category'] &&
+        !(today > e['endTime'])){
         
         let dealEventView: DealEventView = {
           id: e['id'],
@@ -199,16 +202,18 @@ export class NormalUserPage {
           address:  e['address'],
           longitude: e['longitude'],
           latitude:  e['latitude'],
-          attending:  false
+          attending:  false,
+          distance:  this.mapService.getDistanceInKM(this.current.lat, this.current.lng, e['latitude'], e['longitude'])
         }
 
         if(e['attendees'])
           dealEventView.attending = (this.userService.getCurrentUserId() in e['attendees'])
-        
 
         this.dealEventViews.push(dealEventView);
       }
     });
+
+    this.dealEventViews = this.dealEventViews.sort((e1, e2) => e1.distance - e2.distance).splice(0, 10);
   }
 
   redirectToProfilePage(){
