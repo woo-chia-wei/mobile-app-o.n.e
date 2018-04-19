@@ -28,18 +28,21 @@
       <ion-item text-wrap no-lines>
 
         <div item-left>
-          <div class="truncate"><span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
+          <div class="truncate">{{evt.title}}</div>
           <br>
           <span class="event-date" item-left>From: {{evt.startTime | date:'yyyy-MMM-dd HH:mm'}}</span>
           <br>
           <span class="event-date" item-left>To: {{evt.endTime | date:'yyyy-MMM-dd HH:mm'}}</span>
+          <br>
+          <span class="attendees-stat" item-left>{{getAttendeesCount(evt)}}</span>
         </div>
-        <div item-right [ngClass]="{
+        <div item-right>
+
+          <div [ngClass]="{
             'event-open' : getStatus(evt) == 'Open',
             'event-closed' : getStatus(evt) == 'Closed',
             'event-upcoming' : getStatus(evt) == 'Upcoming'
-          }">
-          {{getStatus(evt)}}
+          }">{{getStatus(evt)}}</div>
         </div>
 
       </ion-item>

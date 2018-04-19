@@ -27,7 +27,7 @@
 }
 
 .event-upcoming{
-    color: royalblue;
+    color: cornflowerblue;
 }
 
 .event-open{
@@ -57,4 +57,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
+}
+
+.attendees-stat{
+    color: darkkhaki;
+    font-size: small;
 }

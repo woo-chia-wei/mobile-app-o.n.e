@@ -64,4 +64,12 @@ export class BusinessUserPage {
     this.eventService.deleteEvent(eventId);
   }
 
+  getAttendeesCount(dealEvent: DealEvent): string{
+    if(!dealEvent.attendees) return "Waiting for responses...";
+    let count = Object.keys(dealEvent.attendees).length;
+
+    if(count == 1) return "1 is attending";
+    return count + " are attending"
+  }
+
 }
