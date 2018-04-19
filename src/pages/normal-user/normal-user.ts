@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { CATEGORIES } from '../../shared/references';
 import { EventServiceProvider } from '../../providers/event-service/event-service';
 import { DealEvent, DealEventView } from '../../models/event';
@@ -36,7 +36,8 @@ export class NormalUserPage {
               public eventService: EventServiceProvider,
               public mapService: GoogleMapServiceProvider,
               public geolocation: Geolocation,
-              public userService: UserServiceProvider) {
+              public userService: UserServiceProvider,
+              public alertCtrl: AlertController) {
 
     if(USE_GPS){
       this.GetCurrentLocation();
@@ -245,6 +246,39 @@ export class NormalUserPage {
     }
 
     this.eventService.updateEvent(dealEvent);
+  }
+
+  eventSelected(dealEventView: DealEventView){
+    console.log('In eventSelected now...');
+    
+    let alert = this.alertCtrl.create({
+      title: 'Event Details',
+      message: `
+      <br>
+      <div align="left">
+          <b>Title</b><br>
+          ${dealEventView.title}
+      </div>
+      <br>
+      <div align="left">
+          <b>Description</b><br>
+          ${dealEventView.description}
+      </div>
+      <br>
+      <div align="left">
+          <b>Address</b><br>
+          ${dealEventView.address}
+      </div>
+  
+      `,
+      buttons: [
+        {
+          text: 'Back',
+          role: 'cancel'
+        }
+      ]
+    });
+    alert.present();
   }
 
 }
