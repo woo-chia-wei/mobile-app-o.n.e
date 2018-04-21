@@ -153,11 +153,11 @@ export class NormalUserPage {
   }
 
   getStatus(dealEventView: DealEventView){
-    let today = new Date().getTime();
+    let now = new Date().getTime();
 
-    if(dealEventView.startTime <= today && today <= dealEventView.endTime){
+    if(dealEventView.startTime <= now && now <= dealEventView.endTime){
       return 'Open';
-    }else if(today > dealEventView.endTime){
+    }else if(now > dealEventView.endTime){
       return 'Closed';
     }else{
       return 'Upcoming';

@@ -39,11 +39,11 @@ export class BusinessUserPage {
   }
 
   getStatus(dealEvent: DealEvent){
-    let today = new Date().getTime();
+    let now = new Date().getTime();
 
-    if(dealEvent.startTime <= today && today <= dealEvent.endTime){
+    if(dealEvent.startTime <= now && now <= dealEvent.endTime){
       return 'Open';
-    }else if(today > dealEvent.endTime){
+    }else if(now > dealEvent.endTime){
       return 'Closed';
     }else{
       return 'Upcoming';

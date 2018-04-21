@@ -33,8 +33,8 @@ export class EditEventPage {
               public toastController: ToastController,
               public mapService: GoogleMapServiceProvider) {
     this.dealEvent = navParams.get('data');
-    this.startTime = new Date(this.dealEvent.startTime).toISOString();
-    this.endTime = new Date(this.dealEvent.endTime).toISOString();
+    this.startTime = new Date(this.dealEvent.startTime + 8 * 60 * 60 * 1000).toISOString();
+    this.endTime = new Date(this.dealEvent.endTime + 8 * 60 * 60 * 1000).toISOString();
     this.loadMap();
   }
 
@@ -62,8 +62,8 @@ export class EditEventPage {
 
   saveEvent(){
     try{
-      this.dealEvent.startTime = new Date(this.startTime).getTime();
-      this.dealEvent.endTime = new Date(this.endTime).getTime();
+      this.dealEvent.startTime = new Date(this.startTime).getTime() - 8 * 60 * 60 * 1000;
+      this.dealEvent.endTime = new Date(this.endTime).getTime() - 8 * 60 * 60 * 1000;
       this.eventService.updateEvent(this.dealEvent);
 
       this.toastController.create({

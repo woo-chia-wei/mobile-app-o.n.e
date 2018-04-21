@@ -88,8 +88,8 @@ export class AddDealEventPage {
         let location = this.mapService.getLocation(res) as GeoPosition;
         this.dealEvent.latitude = location.lat;
         this.dealEvent.longitude = location.lng;
-        this.dealEvent.startTime = new Date(this.startTime).getTime();
-        this.dealEvent.endTime = new Date(this.endTime).getTime();
+        this.dealEvent.startTime = new Date(this.startTime).getTime() - 8 * 60 * 60 * 1000;
+        this.dealEvent.endTime = new Date(this.endTime).getTime() - 8 * 60 * 60 * 1000;
         this.dealEvent.createdTime = new Date().getTime();
         this.dealEvent.attendees = {}
 
