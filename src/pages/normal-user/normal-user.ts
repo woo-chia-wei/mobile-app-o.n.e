@@ -246,6 +246,18 @@ export class NormalUserPage {
     }
 
     this.eventService.updateEvent(dealEvent);
+
+    let alert = this.alertCtrl.create({
+      title: 'Notification',
+      message: `Your appointment has been ${dealEventView.attending ? 'confirmed': 'cancelled'}.`,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        }
+      ]
+    });
+    alert.present();
   }
 
   eventSelected(dealEventView: DealEventView){
