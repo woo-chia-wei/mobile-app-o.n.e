@@ -63,8 +63,8 @@ export class NormalUserPage {
     this.geolocation.getCurrentPosition({timeout:10000}).then(location => {
       console.log('Found location', location)
       this.current = {
-        lat: location['coord']['latitude'],
-        lng: location['coord']['longitude']
+        lat: location['coords']['latitude'],
+        lng: location['coords']['longitude']
       }
       this.obtainedFirstPosition = true;
     }).catch(error => {
