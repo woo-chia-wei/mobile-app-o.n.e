@@ -32,7 +32,9 @@
     'search-no-result' : dealEventViews.length == 0,
     'search-has-result' : dealEventViews.length > 0
   }">
+  
     <ion-label>{{showResultStatement()}}</ion-label>
+    <ion-icon name="ios-close-outline" item-end (click)="cancelSecondFilter()" *ngIf="dealEventViewsBackup.length > 0"></ion-icon>
   </ion-item>
 
 </ion-header>

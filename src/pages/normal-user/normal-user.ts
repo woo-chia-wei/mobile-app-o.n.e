@@ -9,6 +9,7 @@ import { ProfilePage } from '../profile/profile';
 import { Geolocation } from '@ionic-native/geolocation';
 import { USE_GPS, CURRENT_LOCATION} from '../../environment/current.location';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import _ from "lodash";
 
 declare var google;
 
@@ -26,8 +27,10 @@ export class NormalUserPage {
   private categoryFilter: string;
   private radiusFilter: number = 1;
   private dealEventViews: DealEventView[] = [];
+  private dealEventViewsBackup: DealEventView[] = [];
   private mainDealEvents: any
   private obtainedFirstPosition: boolean = false;
+  private freshScreen: boolean = true;
 
   private current: GeoPosition;
 
@@ -52,8 +55,12 @@ export class NormalUserPage {
     this.categoryFilter = this.categories[0];
     this.eventService.getEventsForCustomer().subscribe(res => {
       this.mainDealEvents = res;
-      this.updateList();
-      this.loadMap();
+      if(this.freshScreen){
+        this.updateList();
+        this.loadMap();
+        this.freshScreen = true;
+        this.dealEventViewsBackup = [];
+      }
     });
     
   }
@@ -116,9 +123,12 @@ export class NormalUserPage {
 
     this.addCenterMarker(this.current.lat, this.current.lng);
 
-    this.dealEventViews.forEach((dealEventView, index) => {
-      this.addEventMarker(dealEventView.latitude, dealEventView.longitude, (index + 1).toString());
-    });
+    let postalCodeCounts = _.countBy(this.dealEventViews, 'postalCode');
+
+    for (let postalCode in postalCodeCounts) {  
+      let dealEventView = _.find(this.dealEventViews, ['postalCode', postalCode])
+      this.addEventMarker(dealEventView.latitude, dealEventView.longitude, postalCodeCounts[postalCode].toString(), postalCode);
+    }
 
     var cityCircle = new google.maps.Circle({
       strokeColor: '#535399',
@@ -133,11 +143,16 @@ export class NormalUserPage {
  
   }
 
-  addEventMarker(lat: number, lng: number, display: string){
+  addEventMarker(lat: number, lng: number, display: string, postalCode: string){
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(lat, lng),
       icon: `https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=${display}|FF776B|000000`,
-      map: this.map
+      map: this.map,
+      postalCode: postalCode
+    });
+
+    marker.addListener('click', () => {
+      this.updateList2(marker['postalCode'])
     });
   }
   
@@ -169,11 +184,13 @@ export class NormalUserPage {
   }
 
   radiusChanged(){
+    this.dealEventViewsBackup = [];
     this.updateList();
     this.loadMap();
   }
 
   categoryChanged(){
+    this.dealEventViewsBackup = [];
     this.updateList();
     this.loadMap();
   }
@@ -214,7 +231,13 @@ export class NormalUserPage {
       }
     });
 
-    this.dealEventViews = this.dealEventViews.sort((e1, e2) => e1.distance - e2.distance).splice(0, 10);
+    this.dealEventViews = this.dealEventViews.sort((e1, e2) => e1.distance - e2.distance).splice(0, 20);
+  }
+
+  updateList2(postalCode: string){
+    if(this.dealEventViewsBackup.length == 0)
+      this.dealEventViewsBackup = _.cloneDeep(this.dealEventViews);
+    this.dealEventViews = this.dealEventViewsBackup.filter(d => d.postalCode == postalCode);
   }
 
   redirectToProfilePage(){
@@ -245,6 +268,7 @@ export class NormalUserPage {
       delete dealEvent['attendees'][this.userService.getCurrentUserId()]
     }
 
+    this.freshScreen = false;
     this.eventService.updateEvent(dealEvent);
 
     let alert = this.alertCtrl.create({
@@ -291,6 +315,11 @@ export class NormalUserPage {
       ]
     });
     alert.present();
+  }
+
+  cancelSecondFilter(){
+    this.dealEventViews = _.cloneDeep(this.dealEventViewsBackup);
+    this.dealEventViewsBackup = [];
   }
 
 }
