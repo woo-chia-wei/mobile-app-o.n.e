@@ -42,13 +42,13 @@
 
     <ion-list no-lines>
 
-      <ion-item no-lines *ngFor="let evt of dealEventViews; let i = index" (click)="eventSelected(evt)">
+      <ion-item no-lines *ngFor="let evt of dealEventViews; let i = index">
         <div item-left (click)="toggleAttendance(evt)">
           <ion-icon name="ios-checkmark-circle-outline" *ngIf="!evt.attending"></ion-icon>
           <ion-icon name="md-checkmark-circle" *ngIf="evt.attending"></ion-icon>
         </div>
 
-        <div item-left>
+        <div item-left (click)="eventSelected(evt)">
           <div class="truncate">
             <span class="index-title">{{i + 1 | number:'2.0-0'}}.</span> {{evt.title}}</div>
           <br>
