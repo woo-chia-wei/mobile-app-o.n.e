@@ -19,3 +19,15 @@ The solution is to add property automaticDataCollectionEnabled to the FirebaseAp
 	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_001.png" width="318" height="555" style="float:left,padding:50px">
 	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_002.png" width="318" height="555" style="float:right,padding:50px"">
 </p>
+
+#### Business User
+<p align="center"> 
+	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_003.png" width="318" height="555" style="float:left,padding:50px">
+	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_004.png" width="318" height="555" style="float:right,padding:50px"">
+</p>
+
+#### Consumer
+<p align="center"> 
+	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_005.png" width="318" height="555" style="float:left,padding:50px">
+	<img src="https://github.com/woo-chia-wei/mobile-assignment-prototype/blob/master/public/images/image_006.png" width="318" height="555" style="float:right,padding:50px"">
+</p>
